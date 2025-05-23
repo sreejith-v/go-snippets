@@ -15,11 +15,11 @@ type square struct {
 	sideLength float64
 }
 
-func (t triangle) getArea() float64 {
+func (t *triangle) getArea() float64 {
 	return 0.5 * t.base * t.height
 }
 
-func (s square) getArea() float64 {
+func (s *square) getArea() float64 {
 	return s.sideLength * s.sideLength
 }
 
@@ -31,6 +31,8 @@ func main() {
 	s1 := square{10}
 	s2 := triangle{10, 10}
 
-	printArea(s1)
-	printArea(s2)
+	printArea(&s1)
+	printArea(&s2)
+
+	fmt.Println(s1.getArea()) // automatic conversion for pointer receiver
 }

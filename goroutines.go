@@ -20,11 +20,16 @@ func main() {
 	}()
 
 	for i := 0; i < 2; i++ {
+		// The select statement lets a goroutine wait on multiple communication operations.
+		// A select blocks until one of its cases can run, then it executes that case.
+		// It chooses one at random if multiple are ready.
 		select {
 		case msg1 := <-c1:
 			fmt.Println("received", msg1)
 		case msg2 := <-c2:
 			fmt.Println("received", msg2)
+		case <-time.After(1 * time.Second):
+			fmt.Println("timeout")
 		}
 	}
 	//msg1 := <-c1
